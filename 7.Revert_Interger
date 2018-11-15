@@ -1,0 +1,20 @@
+int reverse(int x) {
+    char p[20];
+    int result = 0;
+    int i = 0;
+    while(x != 0) {
+        *(p + i) = (char)(x % 10 + '0' - 0);
+        i ++;
+        x = x / 10;
+    }
+    
+    int j = 0;
+    while(j < i) {
+        long _result = 10 * (long)result + *(p + j) + 0 - '0';
+        if(_result > MAX || _result < MIN) return 0;
+        result = _result;
+        j ++;
+    }
+    
+    return result;
+}
