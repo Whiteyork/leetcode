@@ -1,0 +1,32 @@
+int romanToInt(char* s) {
+    int result = 0;
+    long len = strlen(s);
+    int pre, post;
+    for(int i=0; i < len; i++) {
+        if(i == len - 1) {
+            result += get_value_by_char(s[i]);
+            continue;
+        }
+
+        pre = get_value_by_char(s[i]);
+        post =  get_value_by_char(s[i + 1]);
+        if(pre < post) {
+            result -= pre;
+        } else {
+            result += pre;
+        }
+    }
+    return result;
+}
+
+int get_value_by_char(char type) {
+    if(type == 'I') return 1;
+    if(type == 'V') return 5;
+    if(type == 'X') return 10;
+    if(type == 'L') return 50;
+    if(type == 'C') return 100;
+    if(type == 'D') return 500;
+    if(type == 'M') return 1000;
+    return 0;
+}
+
