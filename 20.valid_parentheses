@@ -1,0 +1,38 @@
+int isValid(char* s) {
+    int len = (int)strlen(s);
+    if(len % 2 != 0) return 0;
+    if(len == 0) return 1;
+    int isValid = 0;
+
+    char *p = s + 1;
+    char *bottom = (char *)calloc(len / 2, sizeof(char));
+    char *top = bottom + 1;
+    *bottom = *s;
+    while(p < s + len) {
+        if(top - bottom > len / 2) break;
+        
+        if(isPaired(*(top - 1), *p)) {
+            if(top != bottom) {
+                top --;
+                *top = '\0';
+            }
+        } else {
+            *top = *p;
+            top ++;
+        }
+        
+        p ++;
+    }
+    
+    isValid = *bottom == '\0';
+    free(bottom);
+    return isValid;
+}
+
+int isPaired(char pre, char post) {
+    if(pre == '(' && post == ')') return 1;
+    if(pre == '[' && post == ']') return 1;
+    if(pre == '{' && post == '}') return 1;
+    return 0;
+}
+
