@@ -1,0 +1,21 @@
+char* longestCommonPrefix(char** strs, int strsSize) {
+    char c;
+    int i, j, flag;
+    int maxLen = (int)strlen(strs[0]);
+    char *result = calloc(maxLen, sizeof(char));
+
+    for(i=0; i<maxLen; i++) {
+        c = strs[0][i];
+        flag = 1;
+        for(j=0; j<strsSize; j++) {
+            if(strs[j][i] == '\0') return result;
+            if(strs[j][i] != c) {
+                flag = 0;
+                break;
+            };
+        }
+        if(flag) result[i] = c;
+    }
+    
+    return result;
+}
